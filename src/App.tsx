@@ -5,22 +5,25 @@ import Navbar from "./components/ui/Navbar/Navbar";
 import Footer from "./components/ui/Footer/Footer";
 import FlexHorizontFirstGrow from "./components/layout/FlexHorizontFirstGrow/FlexHorizontFirstGrow";
 import MemeForm from "./components/MemeForm/MemeForm";
-import MemeSVGViewer from "./components/ui/MemeSVGViewer/MemeSVGViewer";
 import Header from "./components/ui/Header/Header";
+import { emptyMeme, MemeSVGViewer } from "orsys-tjs-meme";
 
 const App = () => {
   return (
+    <>
+    <div>{JSON.stringify(emptyMeme)}</div>
     <div className="App">
       <FlexVerticalThirdGrow style={{}}>
-        <Header></Header>
-        <Navbar></Navbar>
+        <Header/>
+        <Navbar/>
         <FlexHorizontFirstGrow>
-          <MemeSVGViewer></MemeSVGViewer>
-          <MemeForm data={""}></MemeForm>
+          <MemeSVGViewer meme={emptyMeme} image={undefined}/>
+          <MemeForm data={""}/>
         </FlexHorizontFirstGrow>
-        <Footer></Footer>
+        <Footer/>
       </FlexVerticalThirdGrow>
     </div>
+    </>
   );
 };
 
