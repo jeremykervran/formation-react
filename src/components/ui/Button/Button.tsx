@@ -1,13 +1,26 @@
 import styles from "./Button.module.css";
-import type { IButtonProps } from "../../interfaces/IButtonProps";
+import type { ReactElement } from "react";
 
-const Button = ({ style, bgColor="tomato", children }: IButtonProps) => {
+interface IButtonProps {
+  type: "submit" | "reset" | "button";
+  style?: { textDecoration: string };
+  bgColor: "skyblue" | "tomato";
+  children: string | ReactElement | Array<ReactElement | string>;
+}
+
+const Button = ({
+  type = "button",
+  style,
+  bgColor,
+  children,
+}: IButtonProps) => {
   return (
     <button
-    style={{ ...style, backgroundColor: bgColor }}
-    className={ styles.Button + " primary-color" }
+      type={type}
+      style={{ ...style, backgroundColor: bgColor }}
+      className={styles.Button + " primary-color"}
     >
-      { children }
+      {children}
     </button>
   );
 };

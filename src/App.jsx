@@ -5,8 +5,8 @@ function App() {
   return (
     <div>
       Hello World
-      <Button style={{ color:"acquamarine" }}>Hello</Button>
-      <Button style={{ color:"black" }}>World</Button>
+      <Button type="reset" style={{ color:"acquamarine" }}>Hello</Button>
+      <Button type="submit" style={{ color:"black" }}>World</Button>
     </div>
   );
 }
