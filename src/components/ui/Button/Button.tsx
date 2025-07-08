@@ -15,7 +15,7 @@ interface IButtonProps {
   style?: { textDecoration: string; color: string };
   bgColor?: "skyblue" | "tomato";
   children: string | ReactElement | Array<ReactElement | string>;
-  onButtonClick?: () => void;
+  onButtonClick?(): undefined;
 }
 
 /**
@@ -30,7 +30,7 @@ const Button = ({
   bgColor,
   children,
   onButtonClick,
-}: IButtonProps) => {
+}: IButtonProps): React.ReactElement => {
   const [clicked, setClicked] = useState<boolean>(false);
 
   useEffect(() => {
