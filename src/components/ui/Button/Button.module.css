@@ -5,3 +5,8 @@
     background-color: green;
     color: white;
 }
+
+.clicked {
+    box-shadow: 5px 5px 25px grey;
+    border: 1px solid grey;
+}
