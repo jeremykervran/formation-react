@@ -7,8 +7,10 @@ import FlexHorizontFirstGrow from "./components/layout/FlexHorizontFirstGrow/Fle
 import MemeForm from "./components/MemeForm/MemeForm";
 import Header from "./components/ui/Header/Header";
 import { emptyMeme, MemeSVGViewer } from "orsys-tjs-meme";
+import { useState } from 'react'
 
 const App = () => {
+  const [meme, setMeme] = useState(emptyMeme)
   return (
     <>
     <div>{JSON.stringify(emptyMeme)}</div>
@@ -17,8 +19,8 @@ const App = () => {
         <Header/>
         <Navbar/>
         <FlexHorizontFirstGrow>
-          <MemeSVGViewer meme={emptyMeme} image={undefined}/>
-          <MemeForm data={""}/>
+          <MemeSVGViewer meme={meme} image={undefined}/>
+          <MemeForm meme={meme} onMemeChange={(m) => {setMeme(m)}}/>
         </FlexHorizontFirstGrow>
         <Footer/>
       </FlexVerticalThirdGrow>
