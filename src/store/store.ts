@@ -1,11 +1,17 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import currentReducer from "./current";
+import ressourcesReducer from "./ressources";
+import { loadAsyncRessources } from "./ressources";
 
 const store = configureStore({
-  reducer: combineReducers({ current: currentReducer }),
+  reducer: combineReducers({ 
+    current: currentReducer, 
+    ressources:ressourcesReducer 
+  }),
 });
-store.subscribe(()=>console.log(store.getState()))
 
+store.subscribe(()=>console.log(store.getState()))
+store.dispatch(loadAsyncRessources())
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

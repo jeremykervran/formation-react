@@ -1,22 +1,25 @@
 import React from "react";
 import UnconnectedMemeForm from "./MemeForm";
-import type { ImageInterface } from "orsys-tjs-meme";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../store/store";
 import { update } from "../../store/current";
-interface IMemeFormProps {
-  images: Array<ImageInterface>;
-}
 
-const MemeForm = (props: IMemeFormProps) => {
-  const dispatch:AppDispatch = useDispatch();
-  const meme = useSelector((s:RootState) => {
-    return s.current.meme;
+const MemeForm = (props) => {
+  const dispatch: AppDispatch = useDispatch();
+
+  const meme = useSelector((state: RootState) => {
+    return state.current.meme;
   });
+
+  const images = useSelector((state: RootState) => {
+    return state.ressources.images;
+  });
+
   return (
     <UnconnectedMemeForm
       {...props}
       meme={meme}
+      images={images}
       onMemeChange={(m) => {
         dispatch(update(m));
       }}
