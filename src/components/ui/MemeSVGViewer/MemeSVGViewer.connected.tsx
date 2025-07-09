@@ -7,13 +7,13 @@ const MemeSVGViewerConnected = (props) => {
       return state.current.meme;
     });
   
-    const image = useSelector((state: RootState) => {
-      return state.ressources.images.find((element) => element.id === meme.imageId);
+    const images = useSelector((state: RootState) => {
+      return state.ressources.images;
     });
   return (
     <MemeSVGViewer
       {...props}
-      image={image}
+      image={images.find((i) => i.id === meme.imageId)}
       meme={meme}
       basePath=''
     />
