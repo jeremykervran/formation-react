@@ -1,38 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import FlexVerticalThirdGrow from "./components/layout/FlexVerticalThirdGrow/FlexVerticalThirdGrow";
-import Navbar from "./components/ui/Navbar/Navbar";
-import Footer from "./components/ui/Footer/Footer";
-import FlexHorizontFirstGrow from "./components/layout/FlexHorizontFirstGrow/FlexHorizontFirstGrow";
-import MemeForm from "./components/MemeForm/MemeForm";
 import Header from "./components/ui/Header/Header";
-import { emptyMeme, MemeSVGViewer, type ImageInterface } from "orsys-tjs-meme";
-import { useState } from "react";
+import Navbar from "./components/ui/Navbar/Navbar";
+import FlexHorizontFirstGrow from "./components/layout/FlexHorizontFirstGrow/FlexHorizontFirstGrow";
+import MemeForm from "./components/MemeForm/MemeForm.connected";
+import Footer from "./components/ui/Footer/Footer";
+import { MemeSVGViewer, type ImageInterface } from "orsys-tjs-meme";
+import store from './store/store'
 
+// import {images} from '../db/db.json'
 const App = () => {
-  const [meme, setMeme] = useState(emptyMeme);
+  const [meme, setMeme] = useState({});
   const [images, setImages] = useState<Array<ImageInterface>>([]);
+  console.log(store);
 
   useEffect(() => {
-    fetch("http://localhost:5679/images")
-      .then((response) => response.json())
-      .then((arr) => setImages(arr));
+    fetch("http://localhost:5679/images",)
+      .then(r=>r.json())
+      .then(arr=>setImages(arr));
   }, []);
-
+  
   return (
     <>
+      <div>{JSON.stringify(images)}</div>
       <div className="App">
-        <FlexVerticalThirdGrow style={{}}>
-          <Header />
-          <Navbar />
+        <FlexVerticalThirdGrow>
+          <Header></Header>
+          <Navbar></Navbar>
           <FlexHorizontFirstGrow>
-            <MemeSVGViewer meme={meme} image={undefined} />
+            <MemeSVGViewer image={undefined} meme={meme} />
             <MemeForm
               images={images}
-              meme={meme}
-              onMemeChange={(m) => {
-                setMeme(m);
-              }}
             />
           </FlexHorizontFirstGrow>
           <Footer />
