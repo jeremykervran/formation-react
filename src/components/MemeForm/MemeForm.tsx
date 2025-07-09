@@ -177,12 +177,6 @@ const MemeForm: React.FC<IMemeFormProps> = ({ meme, images, onMemeChange }) => {
             onMemeChange({ ...meme, italic: evt.target.checked });
           }}
         />
-        <hr />
-        <br />
-        <Button type="reset">Reset</Button>
-        <Button type="submit" bgColor="skyblue">
-          save
-        </Button>
       </form>
     </div>
   );
