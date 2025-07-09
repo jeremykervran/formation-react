@@ -1,14 +1,15 @@
 import type React from "react";
 import styles from "./MemeForm.module.css";
-import type { MemeInterface } from "orsys-tjs-meme";
+import type { ImageInterface, MemeInterface } from "orsys-tjs-meme";
 import Button from "../ui/Button/Button";
 
 interface IMemeFormProps {
+  images: Array<ImageInterface>;
   meme: MemeInterface;
   onMemeChange(m: MemeInterface): undefined;
 }
 
-const MemeForm: React.FC<IMemeFormProps> = ({ meme, onMemeChange }) => {
+const MemeForm: React.FC<IMemeFormProps> = ({ images, meme, onMemeChange }) => {
   function onStringInputChange(event: React.FormEvent<HTMLInputElement>) {
     const tmp = { ...meme };
     // @ts-expect-error event.target.value in TypeScript
@@ -26,7 +27,7 @@ const MemeForm: React.FC<IMemeFormProps> = ({ meme, onMemeChange }) => {
   function onCheckboxInputChange(event: React.FormEvent<HTMLInputElement>) {
     const tmp = { ...meme };
     // @ts-expect-error event.target.value in TypeScript
-    tmp[event.target.name] = Boolean(event.target.checked)
+    tmp[event.target.name] = event.target.checked
     onMemeChange(tmp);
   }
 
@@ -52,8 +53,11 @@ const MemeForm: React.FC<IMemeFormProps> = ({ meme, onMemeChange }) => {
           <h2>Image</h2>
         </label>
         <br />
-        <select name="image" id="image">
+        <select name="image" id="image" value={meme.imageId} onChange={(event) => onMemeChange({...meme, imageId: Number(event.target.value)})} >
           <option value="-1">No image</option>
+          {images.map((image, position) => (
+            <option key={'si-' + position} value={image.id}>{image.name}</option>
+          ))}
         </select>
         <hr />
         <label htmlFor="text">
@@ -133,7 +137,7 @@ const MemeForm: React.FC<IMemeFormProps> = ({ meme, onMemeChange }) => {
           onInput={onStringInputChange}
         />
         <br />
-        <input name="underline" id="underline" type="checkbox" onInput={onCheckboxInputChange} />
+        <input name="underline" id="underline" type="checkbox" checked={meme.underline} onChange={onCheckboxInputChange} />
         &nbsp;
         <label htmlFor="underline">
           <h2 style={{ display: "inline" }}>underline</h2>
@@ -143,7 +147,7 @@ const MemeForm: React.FC<IMemeFormProps> = ({ meme, onMemeChange }) => {
           <h2 style={{ display: "inline" }}>italic</h2>
         </label>
         &nbsp;
-        <input name="italic" id="italic" type="checkbox" onInput={onCheckboxInputChange} />
+        <input name="italic" id="italic" type="checkbox" checked={meme.italic} onChange={onCheckboxInputChange} />
         <hr />
         <br />
         <Button type="reset">Reset</Button>
