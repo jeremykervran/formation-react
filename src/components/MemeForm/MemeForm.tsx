@@ -23,6 +23,13 @@ const MemeForm: React.FC<IMemeFormProps> = ({ meme, onMemeChange }) => {
     onMemeChange(tmp);
   }
 
+  function onCheckboxInputChange(event: React.FormEvent<HTMLInputElement>) {
+    const tmp = { ...meme };
+    // @ts-expect-error event.target.value in TypeScript
+    tmp[event.target.name] = Boolean(event.target.checked)
+    onMemeChange(tmp);
+  }
+
   return (
     <div className={styles.MemeForm} data-testid="MemeForm">
       <form
@@ -69,7 +76,7 @@ const MemeForm: React.FC<IMemeFormProps> = ({ meme, onMemeChange }) => {
           name="x"
           id="x"
           type="number"
-          value={meme.frameSizeX}
+          value={meme.x}
           onInput={onNumberInputChange}
         />
         <label htmlFor="y">
@@ -80,7 +87,7 @@ const MemeForm: React.FC<IMemeFormProps> = ({ meme, onMemeChange }) => {
           name="y"
           id="y"
           type="number"
-          value={meme.frameSizeY}
+          value={meme.y}
           onInput={onNumberInputChange}
         />
         <hr />
@@ -126,7 +133,7 @@ const MemeForm: React.FC<IMemeFormProps> = ({ meme, onMemeChange }) => {
           onInput={onStringInputChange}
         />
         <br />
-        <input name="underline" id="underline" type="checkbox" />
+        <input name="underline" id="underline" type="checkbox" onInput={onCheckboxInputChange} />
         &nbsp;
         <label htmlFor="underline">
           <h2 style={{ display: "inline" }}>underline</h2>
@@ -136,7 +143,7 @@ const MemeForm: React.FC<IMemeFormProps> = ({ meme, onMemeChange }) => {
           <h2 style={{ display: "inline" }}>italic</h2>
         </label>
         &nbsp;
-        <input name="italic" id="italic" type="checkbox" />
+        <input name="italic" id="italic" type="checkbox" onInput={onCheckboxInputChange} />
         <hr />
         <br />
         <Button type="reset">Reset</Button>

@@ -13,7 +13,7 @@ const App = () => {
   const [meme, setMeme] = useState(emptyMeme)
   return (
     <>
-    <div>{JSON.stringify(emptyMeme)}</div>
+    <div>{JSON.stringify(meme)}</div>
     <div className="App">
       <FlexVerticalThirdGrow style={{}}>
         <Header/>
